@@ -6,7 +6,8 @@ import time
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
-from tiketcom.pages.HomePage import HomePage
+from webdriver_manager.chrome import ChromeDriverManager
+# from tiketcom.pages.HomePage import HomePage
 
 
 
@@ -25,12 +26,12 @@ class TestSearchFlight:
         time.sleep(1)
         
         # click plane icon
-        # plane_icon = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='index_header_inner__ZgIbg']/div[@class='index_content__k_CP2 index_desktop_only__ss43k']//div[@class='SearchForm_verticalIcons__7QwNj']//div[@class='VerticalIcons_listIcon__rGlIP']//div[@class='VerticalIcons_wrapper__4jHIR']//ul[@class='VerticalIcons_lastGrid__93rXJ']//li[1]//a[1]")))
-        # plane_icon.click()
-        # time.sleep(1)
+        plane_icon = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='index_header_inner__ZgIbg']/div[@class='index_content__k_CP2 index_desktop_only__ss43k']//div[@class='SearchForm_verticalIcons__7QwNj']//div[@class='VerticalIcons_listIcon__rGlIP']//div[@class='VerticalIcons_wrapper__4jHIR']//ul[@class='VerticalIcons_lastGrid__93rXJ']//li[1]//a[1]")))
+        plane_icon.click()
+        time.sleep(1)
         
-        click_icon = HomePage(self.driver)
-        click_icon.click_plane_icon()
+        # click_icon = HomePage(self.driver)
+        # click_icon.click_plane_icon()
         
         # choose flight type
         pulang_pergi_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//label[normalize-space()='Pulang-Pergi']")))
