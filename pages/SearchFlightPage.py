@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
+from tiketcom.base.base_driver import BaseDriver
 
-class SearchFlightPage():
+class SearchFlightPage(BaseDriver):
     def __init__(self, driver, wait):
+        super().__init__(driver)
         self.driver = driver
         self.wait = wait
     
