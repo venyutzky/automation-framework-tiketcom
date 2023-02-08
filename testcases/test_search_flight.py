@@ -1,16 +1,12 @@
-# from selenium import webdriver
-from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import time
+
 import sys
 import pytest
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
 # from webdriver_manager.chrome import ChromeDriverManager
-from tiketcom.pages.HomePage import HomePage
-from tiketcom.pages.SearchFlightPage import SearchFlightPage
-from tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
+from automation_framework_tiketcom.pages.HomePage import HomePage
+from automation_framework_tiketcom.pages.SearchFlightPage import SearchFlightPage
+from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
 
 
 @pytest.mark.usefixtures("setup")

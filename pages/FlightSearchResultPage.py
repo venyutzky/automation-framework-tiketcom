@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from tiketcom.base.base_driver import BaseDriver
+from automation_framework_tiketcom.base.base_driver import BaseDriver
 
 class FlightSearchResultPage(BaseDriver):
     
