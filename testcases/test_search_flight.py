@@ -23,6 +23,7 @@ class TestSearchFlight():
         # click plane icon
         in_homepage = HomePage(self.driver, self.wait)
         in_homepage.click_plane_icon()
+        in_homepage.page_scroll()
         
         # choose flight type
         in_searchflightpage = SearchFlightPage(self.driver, self.wait)
@@ -57,16 +58,17 @@ class TestSearchFlight():
         # time.sleep(1)
         
         # scroll down page
-        pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
-        match =  False
-        while (match == False):
-            lastCount = pageLength
-            time.sleep(1)
-            pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
-            if lastCount == pageLength:
-                match = True
+        in_flightsearchresult_page.page_scroll()
+        # pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
+        # match =  False
+        # while (match == False):
+        #     lastCount = pageLength
+        #     time.sleep(1)
+        #     pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
+        #     if lastCount == pageLength:
+        #         match = True
                            
-        time.sleep(4)
+        # time.sleep(4)
         
 
         
