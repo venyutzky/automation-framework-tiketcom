@@ -3,7 +3,6 @@ import sys
 import pytest
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
-# from webdriver_manager.chrome import ChromeDriverManager
 from automation_framework_tiketcom.pages.HomePage import HomePage
 from automation_framework_tiketcom.pages.SearchFlightPage import SearchFlightPage
 from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
@@ -28,7 +27,6 @@ class TestSearchFlight():
         # select going from location
         in_searchflightpage.select_depart_from("Jakarta")
 
-        
         # select going to location
         in_searchflightpage.select_going_to("Padang")
         
@@ -50,21 +48,12 @@ class TestSearchFlight():
         # click on pop up card
         in_flightsearchresult_page = FlightSearchResultPage(self.driver, self.wait)
         in_flightsearchresult_page.click_popup()
-        # self.driver.find_element(By.XPATH, "//div[@class='comp-info-box']//div[@class='v3-btn v3-btn__blue list-horizontal__middle btn-action']").click()
-        # time.sleep(1)
         
         # scroll down page
         in_flightsearchresult_page.page_scroll()
-        # pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
-        # match =  False
-        # while (match == False):
-        #     lastCount = pageLength
-        #     time.sleep(1)
-        #     pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
-        #     if lastCount == pageLength:
-        #         match = True
-                           
-        # time.sleep(4)
+        
+        # in_flightsearchresult_page.filter_flight()
+        
         
 
         
