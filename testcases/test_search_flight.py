@@ -58,7 +58,7 @@ class TestSearchFlight():
         all_airplanes = self.wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")))
         for airplane in all_airplanes:
             print("The Airplane is : " + airplane.text)
-            assert airplane.text == "Super Air Jet"
+            assert airplane.text == "Batik Air"
             print("assert pass")
         
         

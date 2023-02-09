@@ -24,6 +24,7 @@ class SearchFlightPage(BaseDriver):
         all_depart_from = self.wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@role='rowgroup']//li")))
         for result in all_depart_from:
             if "Jakarta" in result.text:
+                time.sleep(1)
                 result.click()
                 break 
         time.sleep(2)
@@ -35,6 +36,7 @@ class SearchFlightPage(BaseDriver):
         all_going_to = self.wait.until(EC.presence_of_all_elements_located((By.XPATH,"//div[@class='box-airport fadeInDown-enter-done']//div[@class='auto-body']//div[@class='row popular']//div[@class='col-xs-12']//ul//div//div[@aria-label='grid']//div/li")))
         for result in all_going_to:
             if "Padang" in result.text:
+                time.sleep(1)
                 result.click()
                 break
         time.sleep(2)
