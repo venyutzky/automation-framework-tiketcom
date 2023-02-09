@@ -1,16 +1,13 @@
-# from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 import sys
 import pytest
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
-# from webdriver_manager.chrome import ChromeDriverManager
-from tiketcom.pages.HomePage import HomePage
-from tiketcom.pages.SearchFlightPage import SearchFlightPage
-from tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
+from automation_framework_tiketcom.pages.HomePage import HomePage
+from automation_framework_tiketcom.pages.SearchFlightPage import SearchFlightPage
+from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
 
 
 @pytest.mark.usefixtures("setup")
@@ -23,7 +20,6 @@ class TestSearchFlight():
         # click plane icon
         in_homepage = HomePage(self.driver, self.wait)
         in_homepage.click_plane_icon()
-        in_homepage.page_scroll()
         
         # choose flight type
         in_searchflightpage = SearchFlightPage(self.driver, self.wait)
@@ -32,7 +28,6 @@ class TestSearchFlight():
         # select going from location
         in_searchflightpage.select_depart_from("Jakarta")
 
-        
         # select going to location
         in_searchflightpage.select_going_to("Padang")
         
@@ -54,21 +49,18 @@ class TestSearchFlight():
         # click on pop up card
         in_flightsearchresult_page = FlightSearchResultPage(self.driver, self.wait)
         in_flightsearchresult_page.click_popup()
-        # self.driver.find_element(By.XPATH, "//div[@class='comp-info-box']//div[@class='v3-btn v3-btn__blue list-horizontal__middle btn-action']").click()
-        # time.sleep(1)
         
         # scroll down page
         in_flightsearchresult_page.page_scroll()
-        # pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
-        # match =  False
-        # while (match == False):
-        #     lastCount = pageLength
-        #     time.sleep(1)
-        #     pageLength = self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var pageLength=document.body.scrollHeight;return pageLength;")
-        #     if lastCount == pageLength:
-        #         match = True
-                           
-        # time.sleep(4)
+        
+        in_flightsearchresult_page.filter_flight()
+        
+        all_airplanes = self.wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")))
+        for airplane in all_airplanes:
+            print("The Airplane is : " + airplane.text)
+            assert airplane.text == "Super Air Jet"
+            print("assert pass")
+        
         
 
         
