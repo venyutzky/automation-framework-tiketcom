@@ -1,4 +1,6 @@
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 import sys
 import pytest
 import os
@@ -18,7 +20,6 @@ class TestSearchFlight():
         # click plane icon
         in_homepage = HomePage(self.driver, self.wait)
         in_homepage.click_plane_icon()
-        in_homepage.page_scroll()
         
         # choose flight type
         in_searchflightpage = SearchFlightPage(self.driver, self.wait)
@@ -52,7 +53,13 @@ class TestSearchFlight():
         # scroll down page
         in_flightsearchresult_page.page_scroll()
         
-        # in_flightsearchresult_page.filter_flight()
+        in_flightsearchresult_page.filter_flight()
+        
+        all_airplanes = self.wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")))
+        for airplane in all_airplanes:
+            print("The Airplane is : " + airplane.text)
+            assert airplane.text == "Super Air Jet"
+            print("assert pass")
         
         
 
