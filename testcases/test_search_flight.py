@@ -18,11 +18,11 @@ class TestSearchFlight():
         # setup
         
         # click plane icon
-        in_homepage = HomePage(self.driver, self.wait)
+        in_homepage = HomePage(self.driver)
         in_homepage.click_plane_icon()
         
         # choose flight type
-        in_searchflightpage = SearchFlightPage(self.driver, self.wait)
+        in_searchflightpage = SearchFlightPage(self.driver)
         in_searchflightpage.select_flight_type()
 
         # select going from location
@@ -35,10 +35,18 @@ class TestSearchFlight():
         in_searchflightpage.select_depart_date("Choose Sabtu, 11 Februari 2023 as your check-in date. It’s available.")
         
         # Provide passenger number
-        in_searchflightpage.select_number_of_passenger()
+        in_searchflightpage.add_adult_passenger_number()
+        in_searchflightpage.subtract_adult_passenger_number()
+        in_searchflightpage.add_child_passenger_number()
+        in_searchflightpage.subtract_child_passenger_number()
+        in_searchflightpage.add_baby_passenger_number()
+        in_searchflightpage.subtract_baby_passenger_number()
         
         # Provide cabin type
-        in_searchflightpage.select_cabin_type()
+        in_searchflightpage.select_premium_ekonomi_cabin()
+        in_searchflightpage.select_bisnis_cabin()
+        in_searchflightpage.select_first_cabin()
+        in_searchflightpage.select_ekonomi_cabin()
 
         # click on SELESAI button
         in_searchflightpage.click_selesai_button()
@@ -47,7 +55,7 @@ class TestSearchFlight():
         in_searchflightpage.click_search_flight_button()
         
         # click on pop up card
-        in_flightsearchresult_page = FlightSearchResultPage(self.driver, self.wait)
+        in_flightsearchresult_page = FlightSearchResultPage(self.driver)
         in_flightsearchresult_page.click_popup()
         
         # scroll down page
@@ -55,10 +63,10 @@ class TestSearchFlight():
         
         in_flightsearchresult_page.filter_flight()
         
-        all_airplanes = self.wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")))
+        all_airplanes = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")
         for airplane in all_airplanes:
             print("The Airplane is : " + airplane.text)
-            assert airplane.text == "Super Air Jet"
+            assert airplane.text == "Batik Air"
             print("assert pass")
         
         
