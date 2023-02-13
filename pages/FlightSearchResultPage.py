@@ -17,6 +17,4 @@ class FlightSearchResultPage(BaseDriver):
         time.sleep(1)
         all_airplanes = self.wait_for_presence_of_all_elements_located(By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")
         print(len(all_airplanes))
-        for airplane in all_airplanes:
-            print(airplane.text)
         time.sleep(1)

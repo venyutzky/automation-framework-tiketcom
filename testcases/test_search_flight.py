@@ -8,6 +8,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
 from automation_framework_tiketcom.pages.HomePage import HomePage
 from automation_framework_tiketcom.pages.SearchFlightPage import SearchFlightPage
 from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
+from automation_framework_tiketcom.utilities.utils import Utils
 
 
 @pytest.mark.usefixtures("setup")
@@ -19,28 +20,30 @@ class TestSearchFlight():
         
         # click plane icon
         in_homepage = HomePage(self.driver)
-        in_homepage.click_plane_icon()
+        # in_homepage.click_plane_icon()
+        in_homepage.clickPlaneIcon()
         
         # choose flight type
         in_searchflightpage = SearchFlightPage(self.driver)
-        in_searchflightpage.select_flight_type()
+        in_searchflightpage.clickPulangPergiButton()
+        in_searchflightpage.clickSekaliJalanButton()
 
         # select going from location
-        in_searchflightpage.select_depart_from("Jakarta")
+        in_searchflightpage.enterDepartFromLocation("Jakarta")
 
         # select going to location
-        in_searchflightpage.select_going_to("Padang")
+        in_searchflightpage.enterGoingToLocation("Padang")
         
         # select date
-        in_searchflightpage.select_depart_date("Choose Sabtu, 11 Februari 2023 as your check-in date. It’s available.")
+        in_searchflightpage.enterDepartureDate("Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
         
         # Provide passenger number
-        in_searchflightpage.add_adult_passenger_number()
-        in_searchflightpage.subtract_adult_passenger_number()
-        in_searchflightpage.add_child_passenger_number()
-        in_searchflightpage.subtract_child_passenger_number()
-        in_searchflightpage.add_baby_passenger_number()
-        in_searchflightpage.subtract_baby_passenger_number()
+        in_searchflightpage.clickAddAdultPassengerButton()
+        in_searchflightpage.clickSubstractAdultPassengerButton()
+        in_searchflightpage.clickAddChildPassengerButton()
+        in_searchflightpage.clickSubstractChildPassengerButton()
+        in_searchflightpage.clickAddBabyPassengerButton()
+        in_searchflightpage.clickSubstractBabyPassengerButton()
         
         # Provide cabin type
         in_searchflightpage.select_premium_ekonomi_cabin()
@@ -64,10 +67,9 @@ class TestSearchFlight():
         in_flightsearchresult_page.filter_flight()
         
         all_airplanes = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")
-        for airplane in all_airplanes:
-            print("The Airplane is : " + airplane.text)
-            assert airplane.text == "Batik Air"
-            print("assert pass")
+        
+        ut = Utils()
+        ut.assertListItemText(all_airplanes, "Batik Air")
         
         
 
