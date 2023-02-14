@@ -22,25 +22,76 @@ class SearchFlightPage(BaseDriver):
     SUBSTRACT_CHILD_PASSENGER_BUTTON = "//div[@class='col-xs-6 col-passenger']//ul/li[2]//div[@class='col-xs-6 passenger-count right']//button[@class='button-count js-btn-minus']"
     ADD_BABY_PASSENGER_BUTTON = "//div[@class='col-xs-6 col-passenger']//ul/li[3]//div[@class='col-xs-6 passenger-count right']//button[@class='button-count js-btn-plus']"
     SUBSTRACT_BABY_PASSENGER_BUTTON = "//div[@class='col-xs-6 col-passenger']//ul/li[3]//div[@class='col-xs-6 passenger-count right']//button[@class='button-count js-btn-minus']"
+    PREMIUM_EKONOMI_CABIN_FIELD = "//label[normalize-space()='Premium Ekonomi']"
+    BISNIS_CABIN_FIELD = "//label[normalize-space()='Bisnis']"
+    FIRST_CABIN_FIELD = "//label[normalize-space()='First']"
+    EKONOMI_CABIN_FIELD = "//label[normalize-space()='Ekonomi']"
+    SELESAI_BUTTON_LOCATION = "//button[normalize-space()='SELESAI']"
+    FLIGHT_SEARCH_BUTTON_LOCATION = "//button[normalize-space()='CARI PENERBANGAN']"
     
     def getPulangPergiField(self):
         return self.wait_until_element_is_clickable(By.XPATH, self.PULANG_PERGI_FIELD)
     
-    def clickPulangPergiButton(self):
-        self.getPulangPergiField().click()
-    
     def getSekaliJalanField(self):
         return self.wait_until_element_is_clickable(By.XPATH, self.SEKALI_JALAN_FIELD)
     
-    def clickSekaliJalanButton(self):
-        self.getSekaliJalanField().click()
-        
     def getDepartFromField(self):
         return self.wait_until_element_is_clickable(By.XPATH, self.DEPART_FROM_FIELD)
     
     def getAllDepartFrom(self):
         return self.wait_for_presence_of_all_elements_located(By.XPATH, self.ALL_DEPART_FROM)
     
+    def getGoingToFiled(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.GOING_TO_FIELD)
+    
+    def getAllGoingTo(self):
+        return self.wait_for_presence_of_all_elements_located(By.XPATH,self.ALL_GOING_TO)
+    
+    def getAllDate(self):
+       return self.wait_for_presence_of_all_elements_located(By.XPATH, self.ALL_DATES)
+   
+    def getAddAdultPassengerButton(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.ADD_ADULT_PASSENGER_BUTTON)
+    
+    def getSubstractAdultPassengerButton(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.SUBSTRACT_ADULT_PASSENGER_BUTTON)
+    
+    def getAddChildPassengerButton(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.ADD_CHILD_PASSENGER_BUTTON)
+    
+    def getSubstractChildPassengerButton(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.SUBSTRACT_CHILD_PASSENGER_BUTTON)
+    
+    def getAddBabyPassengerButton(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.ADD_CHILD_PASSENGER_BUTTON)
+    
+    def getSubstractBabyPassengerButton(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.SUBSTRACT_CHILD_PASSENGER_BUTTON)
+    
+    def getPremiumEkonomiCabinField(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.PREMIUM_EKONOMI_CABIN_FIELD)
+    
+    def getBisnisCabinField(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.BISNIS_CABIN_FIELD)
+    
+    def getFirstCabinField(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.FIRST_CABIN_FIELD)
+    
+    def getEkonomiCabinField(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.EKONOMI_CABIN_FIELD)
+    
+    def getSelesaiButton(self):
+        return self.driver.find_element(By.XPATH, self.SELESAI_BUTTON_LOCATION)
+    
+    def getSearchFlightButton(self):
+        return self.driver.find_element(By.XPATH, self.FLIGHT_SEARCH_BUTTON_LOCATION)
+    
+    def clickPulangPergiButton(self):
+        self.getPulangPergiField().click()
+
+    def clickSekaliJalanButton(self):
+        self.getSekaliJalanField().click()
+
     def enterDepartFromLocation(self, departure_from):
         self.getDepartFromField().click()
         self.getDepartFromField().send_keys(departure_from)
@@ -49,13 +100,7 @@ class SearchFlightPage(BaseDriver):
             if departure_from in result.text:
                 result.click()
                 break
-            
-    def getGoingToFiled(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.GOING_TO_FIELD)
-    
-    def getAllGoingTo(self):
-        return self.wait_for_presence_of_all_elements_located(By.XPATH,self.ALL_GOING_TO)
-    
+
     def enterGoingToLocation(self, destination_to):
         self.getGoingToFiled().click()
         self.getGoingToFiled().send_keys(destination_to)
@@ -64,78 +109,52 @@ class SearchFlightPage(BaseDriver):
             if destination_to in result.text:
                 result.click()
                 break
-   
-    def getAllDate(self):
-       return self.wait_for_presence_of_all_elements_located(By.XPATH, self.ALL_DATES)
-   
+
     def enterDepartureDate(self, depart_date):
        all_date = self.getAllDate()
        for date in all_date:
            if date.get_attribute("aria-label") == depart_date:
                date.click()
                break
-        
-    def getAddAdultPassengerButton(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.ADD_ADULT_PASSENGER_BUTTON)
-    
+ 
     def clickAddAdultPassengerButton(self):
         self.getAddAdultPassengerButton().click()
         
-    def getSubstractAdultPassengerButton(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.SUBSTRACT_ADULT_PASSENGER_BUTTON)
-    
     def clickSubstractAdultPassengerButton(self):
         self.getSubstractAdultPassengerButton().click()
 
-    def getAddChildPassengerButton(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.ADD_CHILD_PASSENGER_BUTTON)
-    
     def clickAddChildPassengerButton(self):
         self.getAddChildPassengerButton().click()
-    
-    def getSubstractChildPassengerButton(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.SUBSTRACT_CHILD_PASSENGER_BUTTON)
-    
+
     def clickSubstractChildPassengerButton(self):
         self.getSubstractChildPassengerButton().click()
-    
-    def getAddBabyPassengerButton(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.ADD_CHILD_PASSENGER_BUTTON)
-    
+
     def clickAddBabyPassengerButton(self):
         self.getAddBabyPassengerButton().click()
-    
-    def getSubstractBabyPassengerButton(self):
-        return self.wait_until_element_is_clickable(By.XPATH, self.SUBSTRACT_CHILD_PASSENGER_BUTTON)
-    
+
     def clickSubstractBabyPassengerButton(self):
         self.getSubstractBabyPassengerButton().click()
-    
-    
-    def select_premium_ekonomi_cabin(self):
-        kabin_premium_ekonomi = self.wait_until_element_is_clickable(By.XPATH, "//label[normalize-space()='Premium Ekonomi']")
-        kabin_premium_ekonomi.click()
-        time.sleep(1)
-    
-    def select_bisnis_cabin(self):    
-        kabin_bisnis = self.wait_until_element_is_clickable(By.XPATH, "//label[normalize-space()='Bisnis']")
-        kabin_bisnis.click()
-        time.sleep(1)
+
+    def selectPremiumEkonomiCabin(self):
+        self.getPremiumEkonomiCabinField().click()
+
+    def selectBisnisCabin(self):
+        self.getBisnisCabinField().click()
+
+    def selectFirstCabin(self):
+        self.getFirstCabinField().click()
+
+    def selectEkonomiCabin(self):
+        self.getEkonomiCabinField().click()
+
+    def clickSelesaiButton(self):
+        self.getSelesaiButton().click()
+
+    def clickSearchFlightButton(self):
+        self.getSearchFlightButton().click()
         
-    def select_first_cabin(self):    
-        kabin_first = self.wait_until_element_is_clickable(By.XPATH, "//label[normalize-space()='First']")
-        kabin_first.click()
-        time.sleep(1)
-    
-    def select_ekonomi_cabin(self):    
-        kabin_ekonomi = self.wait_until_element_is_clickable(By.XPATH, "//label[normalize-space()='Ekonomi']")
-        kabin_ekonomi.click()
-        time.sleep(1)
-    
-    def click_selesai_button(self):
-        self.driver.find_element(By.XPATH, "//button[normalize-space()='SELESAI']").click()
-        time.sleep(1)
+    def searchFlights(self, departure_from, destination_to, depart_date):
+        self.enterDepartFromLocation(departure_from)
+        self.enterGoingToLocation(destination_to)
+        self.enterDepartureDate(depart_date)
         
-    def click_search_flight_button(self):
-        self.driver.find_element(By.XPATH, "//button[normalize-space()='CARI PENERBANGAN']").click()
-        time.sleep(1)

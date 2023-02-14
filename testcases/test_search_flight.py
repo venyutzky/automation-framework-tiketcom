@@ -28,14 +28,8 @@ class TestSearchFlight():
         in_searchflightpage.clickPulangPergiButton()
         in_searchflightpage.clickSekaliJalanButton()
 
-        # select going from location
-        in_searchflightpage.enterDepartFromLocation("Jakarta")
-
-        # select going to location
-        in_searchflightpage.enterGoingToLocation("Padang")
-        
-        # select date
-        in_searchflightpage.enterDepartureDate("Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
+        # Search Flight
+        in_searchflightpage.searchFlights("Jakarta", "Padang", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
         
         # Provide passenger number
         in_searchflightpage.clickAddAdultPassengerButton()
@@ -46,30 +40,35 @@ class TestSearchFlight():
         in_searchflightpage.clickSubstractBabyPassengerButton()
         
         # Provide cabin type
-        in_searchflightpage.select_premium_ekonomi_cabin()
-        in_searchflightpage.select_bisnis_cabin()
-        in_searchflightpage.select_first_cabin()
-        in_searchflightpage.select_ekonomi_cabin()
+        in_searchflightpage.selectPremiumEkonomiCabin()
+        in_searchflightpage.selectBisnisCabin()
+        in_searchflightpage.selectFirstCabin()
+        in_searchflightpage.selectEkonomiCabin()
 
         # click on SELESAI button
-        in_searchflightpage.click_selesai_button()
+        # in_searchflightpage.click_selesai_button()
+        in_searchflightpage.clickSelesaiButton()
         
         # click on flight search button
-        in_searchflightpage.click_search_flight_button()
+        # in_searchflightpage.click_search_flight_button()
+        in_searchflightpage.clickSearchFlightButton()
         
         # click on pop up card
         in_flightsearchresult_page = FlightSearchResultPage(self.driver)
-        in_flightsearchresult_page.click_popup()
+        in_flightsearchresult_page.clickPopUpButton()
         
         # scroll down page
         in_flightsearchresult_page.page_scroll()
         
-        in_flightsearchresult_page.filter_flight()
+        in_flightsearchresult_page.filterAirplaneAirlines()
         
-        all_airplanes = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")
+        # all_airplanes = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")
+        
+        filter_by_transit = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "(//div[@class='text-total-time'][normalize-space()=''])")
+        
         
         ut = Utils()
-        ut.assertListItemText(all_airplanes, "Batik Air")
+        ut.assertListItemText(filter_by_transit, "Langsung")
         
         
 
