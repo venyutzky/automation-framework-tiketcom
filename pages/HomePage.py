@@ -10,11 +10,15 @@ class HomePage(BaseDriver):
         super().__init__(driver)
         self.driver = driver
 
+    # Locator
+    PLANE_ICON_LOCATION =  "//div[@class='index_header_inner__ZgIbg']/div[@class='index_content__k_CP2 index_desktop_only__ss43k']//div[@class='SearchForm_verticalIcons__7QwNj']//div[@class='VerticalIcons_listIcon__rGlIP']//div[@class='VerticalIcons_wrapper__4jHIR']//ul[@class='VerticalIcons_lastGrid__93rXJ']//li[1]//a[1]"
+    
+    def getPlaneIconLocation(self):
+        return self.wait_until_element_is_clickable(By.XPATH, self.PLANE_ICON_LOCATION)
+    
+    def clickPlaneIcon(self):
+        self.getPlaneIconLocation().click()
      
-    def click_plane_icon(self):
-        plane_icon = self.wait_until_element_is_clickable(By.XPATH, "//div[@class='index_header_inner__ZgIbg']/div[@class='index_content__k_CP2 index_desktop_only__ss43k']//div[@class='SearchForm_verticalIcons__7QwNj']//div[@class='VerticalIcons_listIcon__rGlIP']//div[@class='VerticalIcons_wrapper__4jHIR']//ul[@class='VerticalIcons_lastGrid__93rXJ']//li[1]//a[1]")
-        plane_icon.click()
-        time.sleep(1)
         
     
     
