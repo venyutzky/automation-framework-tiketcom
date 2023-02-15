@@ -57,15 +57,14 @@ class TestSearchFlight():
         in_flightsearchresult_page = FlightSearchResultPage(self.driver)
         in_flightsearchresult_page.clickPopUpButton()
         
+        # Filter the flights
+        in_flightsearchresult_page.filterFlightTransit("Langsung")
+        
         # scroll down page
         in_flightsearchresult_page.page_scroll()
         
-        in_flightsearchresult_page.filterAirplaneAirlines()
-        
-        # all_airplanes = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "//div[@class='section-box-content']/div/div[@class='wrapper-flight-list']/div[@class='row relative']/div[@class='col-xs-6 relative']/div[@class='row']/span[@class='text-marketing-airline']")
-        
-        filter_by_transit = in_flightsearchresult_page.wait_for_presence_of_all_elements_located(By.XPATH, "(//div[@class='text-total-time'][normalize-space()=''])")
-        
+        filter_by_transit = in_flightsearchresult_page.getSearchFlightByTransitResult()
+        print(len(filter_by_transit))
         
         ut = Utils()
         ut.assertListItemText(filter_by_transit, "Langsung")

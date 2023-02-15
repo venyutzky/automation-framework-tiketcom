@@ -15,10 +15,8 @@ class FlightSearchResultPage(BaseDriver):
     FILTER_LANGSUNG_FIELD = "//label[normalize-space()='Langsung']"
     FILTER_1_TRANSIT_FIELD = "//label[normalize-space()='1 Transit']"
     FILTER_2_TRANSIT_FIELD = "//label[normalize-space()='2+ Transit']"
+    SEARCH_FLIGHT_BY_TRANSIT_RESULT = "//div[@class='text-total-time'][contains(text(), 'Langsung') or contains(text(), '1 Transit') or contains(text(), '2+ Transit')]"
     
-    # def click_popup(self):
-    #     self.driver.find_element(By.XPATH, "//div[@class='comp-info-box']//div[@class='v3-btn v3-btn__blue list-horizontal__middle btn-action']").click()
-    #     time.sleep(1)
         
     def getPopUpButtonLocation(self):
         return self.driver.find_element(By.XPATH, self.POPUP_BUTTON_LOCATION)
@@ -34,6 +32,9 @@ class FlightSearchResultPage(BaseDriver):
     
     def getTwoTransitField(self):
         return self.driver.find_element(By.XPATH, self.FILTER_2_TRANSIT_FIELD)
+    
+    def getSearchFlightByTransitResult(self):
+        return self.wait_for_presence_of_all_elements_located(By.XPATH, self.SEARCH_FLIGHT_BY_TRANSIT_RESULT)
     
     def clickPopUpButton(self):
         self.getPopUpButtonLocation().click()
@@ -53,3 +54,5 @@ class FlightSearchResultPage(BaseDriver):
         elif filter_transit == "2+ transit":
             self.getTwoTransitField().click()
             print("Selected flights with 2 or more transit")
+        else:
+            print("Please provide valid filter option")
