@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from automation_framework_tiketcom.base.base_driver import BaseDriver
+from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
 
 class SearchFlightPage(BaseDriver):
     def __init__(self, driver):
@@ -95,6 +96,7 @@ class SearchFlightPage(BaseDriver):
     def enterDepartFromLocation(self, departure_from):
         self.getDepartFromField().click()
         self.getDepartFromField().send_keys(departure_from)
+        time.sleep(2)
         all_depart_from =  self.getAllDepartFrom()
         for result in all_depart_from:
             if departure_from in result.text:
@@ -104,6 +106,7 @@ class SearchFlightPage(BaseDriver):
     def enterGoingToLocation(self, destination_to):
         self.getGoingToFiled().click()
         self.getGoingToFiled().send_keys(destination_to)
+        time.sleep(2)
         all_going_to = self.getAllGoingTo()
         for result in all_going_to:
             if destination_to in result.text:
@@ -112,6 +115,7 @@ class SearchFlightPage(BaseDriver):
 
     def enterDepartureDate(self, depart_date):
        all_date = self.getAllDate()
+       time.sleep(2)
        for date in all_date:
            if date.get_attribute("aria-label") == depart_date:
                date.click()
@@ -152,6 +156,8 @@ class SearchFlightPage(BaseDriver):
 
     def clickSearchFlightButton(self):
         self.getSearchFlightButton().click()
+        search_flight_result = FlightSearchResultPage(self.driver)
+        return search_flight_result
         
     def searchFlights(self, departure_from, destination_to, depart_date):
         self.enterDepartFromLocation(departure_from)

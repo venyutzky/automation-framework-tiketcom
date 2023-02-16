@@ -1,73 +1,88 @@
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 import sys
 import pytest
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
 from automation_framework_tiketcom.pages.HomePage import HomePage
-from automation_framework_tiketcom.pages.SearchFlightPage import SearchFlightPage
-from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
 from automation_framework_tiketcom.utilities.utils import Utils
 
 
 @pytest.mark.usefixtures("setup")
 class TestSearchFlight():
     
-    def test_search_flight(self):
-        
-        # setup
-        
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
+        self.in_homepage = HomePage(self.driver)
+        self.ut = Utils()
+    
+    def test_search_flight_without_transit(self):
         # click plane icon
-        in_homepage = HomePage(self.driver)
-        # in_homepage.click_plane_icon()
-        in_homepage.clickPlaneIcon()
-        
+        search_flight = self.in_homepage.clickPlaneIcon()
         # choose flight type
-        in_searchflightpage = SearchFlightPage(self.driver)
-        in_searchflightpage.clickPulangPergiButton()
-        in_searchflightpage.clickSekaliJalanButton()
-
+        search_flight.clickPulangPergiButton()
+        search_flight.clickSekaliJalanButton()
         # Search Flight
-        in_searchflightpage.searchFlights("Jakarta", "Padang", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
-        
+        search_flight.searchFlights("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
         # Provide passenger number
-        in_searchflightpage.clickAddAdultPassengerButton()
-        in_searchflightpage.clickSubstractAdultPassengerButton()
-        in_searchflightpage.clickAddChildPassengerButton()
-        in_searchflightpage.clickSubstractChildPassengerButton()
-        in_searchflightpage.clickAddBabyPassengerButton()
-        in_searchflightpage.clickSubstractBabyPassengerButton()
-        
+        search_flight.clickAddAdultPassengerButton()
+        search_flight.clickSubstractAdultPassengerButton()
+        search_flight.clickAddChildPassengerButton()
+        search_flight.clickSubstractChildPassengerButton()
+        search_flight.clickAddBabyPassengerButton()
+        search_flight.clickSubstractBabyPassengerButton()
         # Provide cabin type
-        in_searchflightpage.selectPremiumEkonomiCabin()
-        in_searchflightpage.selectBisnisCabin()
-        in_searchflightpage.selectFirstCabin()
-        in_searchflightpage.selectEkonomiCabin()
-
-        # click on SELESAI button
-        # in_searchflightpage.click_selesai_button()
-        in_searchflightpage.clickSelesaiButton()
-        
+        search_flight.selectPremiumEkonomiCabin()
+        search_flight.selectBisnisCabin()
+        search_flight.selectFirstCabin()
+        search_flight.selectEkonomiCabin()
+        # click on SELESAI butto
+        search_flight.clickSelesaiButton()
         # click on flight search button
-        # in_searchflightpage.click_search_flight_button()
-        in_searchflightpage.clickSearchFlightButton()
-        
+        search_flight_result = search_flight.clickSearchFlightButton()
         # click on pop up card
-        in_flightsearchresult_page = FlightSearchResultPage(self.driver)
-        in_flightsearchresult_page.clickPopUpButton()
-        
+        search_flight_result.clickPopUpButton()
         # Filter the flights
-        in_flightsearchresult_page.filterFlightTransit("Langsung")
-        
+        search_flight_result.filterFlightTransit("Langsung")
         # scroll down page
-        in_flightsearchresult_page.page_scroll()
-        
-        filter_by_transit = in_flightsearchresult_page.getSearchFlightByTransitResult()
+        search_flight_result.page_scroll()
+        # assert filter flight
+        filter_by_transit = search_flight_result.getSearchFlightByTransitResult()
         print(len(filter_by_transit))
+        self.ut.assertListItemText(filter_by_transit, "Langsung")
         
-        ut = Utils()
-        ut.assertListItemText(filter_by_transit, "Langsung")
+    def test_search_flight_with_one_transit(self):
+        # click plane icon
+        search_flight = self.in_homepage.clickPlaneIcon()
+        # choose flight type
+        search_flight.clickPulangPergiButton()
+        search_flight.clickSekaliJalanButton()
+        # Search Flight
+        search_flight.searchFlights("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
+        # Provide passenger number
+        search_flight.clickAddAdultPassengerButton()
+        search_flight.clickSubstractAdultPassengerButton()
+        search_flight.clickAddChildPassengerButton()
+        search_flight.clickSubstractChildPassengerButton()
+        search_flight.clickAddBabyPassengerButton()
+        search_flight.clickSubstractBabyPassengerButton()
+        # Provide cabin type
+        search_flight.selectPremiumEkonomiCabin()
+        search_flight.selectBisnisCabin()
+        search_flight.selectFirstCabin()
+        search_flight.selectEkonomiCabin()
+        # click on SELESAI butto
+        search_flight.clickSelesaiButton()
+        # click on flight search button
+        search_flight_result = search_flight.clickSearchFlightButton()
+        # click on pop up card
+        search_flight_result.clickPopUpButton()
+        # Filter the flights
+        search_flight_result.filterFlightTransit("1 Transit")
+        # scroll down page
+        search_flight_result.page_scroll()
+        # assert filter flight
+        filter_by_transit = search_flight_result.getSearchFlightByTransitResult()
+        print(len(filter_by_transit))
+        self.ut.assertListItemText(filter_by_transit, "1 Transit")
         
         
 

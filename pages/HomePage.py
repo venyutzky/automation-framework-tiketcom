@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from automation_framework_tiketcom.base.base_driver import BaseDriver
+from automation_framework_tiketcom.pages.SearchFlightPage import SearchFlightPage
 
 
 class HomePage(BaseDriver):
@@ -18,6 +19,8 @@ class HomePage(BaseDriver):
     
     def clickPlaneIcon(self):
         self.getPlaneIconLocation().click()
+        search_flight = SearchFlightPage(self.driver)
+        return search_flight
      
         
     
