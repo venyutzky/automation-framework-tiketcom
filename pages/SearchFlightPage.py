@@ -1,10 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
+
 from automation_framework_tiketcom.base.base_driver import BaseDriver
 from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
+from automation_framework_tiketcom.utilities.utils import Utils
 
 class SearchFlightPage(BaseDriver):
+    log = Utils.custom_logger()
+    
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -105,7 +109,9 @@ class SearchFlightPage(BaseDriver):
 
     def enterGoingToLocation(self, destination_to):
         self.getGoingToFiled().click()
+        self.log.info("Clicked on going to")
         self.getGoingToFiled().send_keys(destination_to)
+        self.log.info("Typed text into going to field succesfully")
         time.sleep(2)
         all_going_to = self.getAllGoingTo()
         for result in all_going_to:

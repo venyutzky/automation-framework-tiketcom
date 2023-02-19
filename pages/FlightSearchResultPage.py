@@ -1,9 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import logging
 from automation_framework_tiketcom.base.base_driver import BaseDriver
+from automation_framework_tiketcom.utilities.utils import Utils
 
 class FlightSearchResultPage(BaseDriver):
+    log = Utils.custom_logger(loglevel=logging.WARNING)
     
     def __init__(self, driver):
         super().__init__(driver)
@@ -47,12 +50,12 @@ class FlightSearchResultPage(BaseDriver):
     def filterFlightTransit(self, filter_transit):
         if filter_transit == "Langsung":
             self.getFilterLangsungField().click()
-            print("Selected flights without transit")
+            self.log.warning("Selected flights without transit")
         elif filter_transit == "1 Transit":
             self.getOneTransitField().click()
-            print("Selected flights with 1 transit")
+            self.log.warning("Selected flights with 1 transit")
         elif filter_transit == "2+ transit":
             self.getTwoTransitField().click()
-            print("Selected flights with 2 or more transit")
+            self.log.warning("Selected flights with 2 or more transit")
         else:
             print("Please provide valid filter option")
