@@ -10,6 +10,8 @@ from automation_framework_tiketcom.utilities.utils import Utils
 @pytest.mark.usefixtures("setup")
 class TestSearchFlightAndVerifyFilter(softest.TestCase):
     
+    log = Utils.custom_logger()
+    
     @pytest.fixture(autouse=True)
     def setup_class(self):
         self.in_homepage = HomePage(self.driver)
@@ -47,7 +49,7 @@ class TestSearchFlightAndVerifyFilter(softest.TestCase):
         search_flight_result.page_scroll()
         # assert filter flight
         filter_by_transit = search_flight_result.getSearchFlightByTransitResult()
-        print(len(filter_by_transit))
+        self.log.info(len(filter_by_transit))
         self.ut.assertListItemText(filter_by_transit, "Langsung")
         
    
