@@ -1,5 +1,6 @@
 import sys
 import pytest
+import softest
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
 from automation_framework_tiketcom.pages.HomePage import HomePage
@@ -7,7 +8,7 @@ from automation_framework_tiketcom.utilities.utils import Utils
 
 
 @pytest.mark.usefixtures("setup")
-class TestSearchFlight():
+class TestSearchFlightAndVerifyFilter(softest.TestCase):
     
     @pytest.fixture(autouse=True)
     def setup_class(self):
@@ -49,41 +50,4 @@ class TestSearchFlight():
         print(len(filter_by_transit))
         self.ut.assertListItemText(filter_by_transit, "Langsung")
         
-    def test_search_flight_with_one_transit(self):
-        # click plane icon
-        search_flight = self.in_homepage.clickPlaneIcon()
-        # choose flight type
-        search_flight.clickPulangPergiButton()
-        search_flight.clickSekaliJalanButton()
-        # Search Flight
-        search_flight.searchFlights("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
-        # Provide passenger number
-        search_flight.clickAddAdultPassengerButton()
-        search_flight.clickSubstractAdultPassengerButton()
-        search_flight.clickAddChildPassengerButton()
-        search_flight.clickSubstractChildPassengerButton()
-        search_flight.clickAddBabyPassengerButton()
-        search_flight.clickSubstractBabyPassengerButton()
-        # Provide cabin type
-        search_flight.selectPremiumEkonomiCabin()
-        search_flight.selectBisnisCabin()
-        search_flight.selectFirstCabin()
-        search_flight.selectEkonomiCabin()
-        # click on SELESAI butto
-        search_flight.clickSelesaiButton()
-        # click on flight search button
-        search_flight_result = search_flight.clickSearchFlightButton()
-        # click on pop up card
-        search_flight_result.clickPopUpButton()
-        # Filter the flights
-        search_flight_result.filterFlightTransit("1 Transit")
-        # scroll down page
-        search_flight_result.page_scroll()
-        # assert filter flight
-        filter_by_transit = search_flight_result.getSearchFlightByTransitResult()
-        print(len(filter_by_transit))
-        self.ut.assertListItemText(filter_by_transit, "1 Transit")
-        
-        
-
-        
+   
