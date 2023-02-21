@@ -1,3 +1,15 @@
 2023-02-19 18:13:32 - INFO - TestSearchFlightAndVerifyFilter : 1
 flights without transit
 INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-02-21 12:32:33 - INFO - SearchFlightPage : Clicked on going to
+2023-02-21 12:32:34 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-02-21 12:32:41 - WARNING - FlightSearchResultPage : Selected flights without transit
+2023-02-21 12:32:49 - INFO - TestSearchFlightAndVerifyFilter : 1
+2023-02-21 12:37:46 - INFO - SearchFlightPage : Clicked on going to
+2023-02-21 12:37:46 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-02-21 12:37:53 - WARNING - FlightSearchResultPage : Selected flights without transit
+2023-02-21 12:38:01 - INFO - TestSearchFlightAndVerifyFilter : 1
+2023-02-21 12:38:12 - INFO - SearchFlightPage : Clicked on going to
+2023-02-21 12:38:12 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-02-21 12:38:19 - WARNING - FlightSearchResultPage : Selected flights without transit
+2023-02-21 12:38:27 - INFO - TestSearchFlightAndVerifyFilter : 1
