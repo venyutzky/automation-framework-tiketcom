@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
 from automation_framework_tiketcom.pages.HomePage import HomePage
 from automation_framework_tiketcom.utilities.utils import Utils
-from ddt import ddt, data, unpack
+from ddt import ddt, data, file_data, unpack
 
 
 @pytest.mark.usefixtures("setup")
@@ -19,9 +19,10 @@ class TestSearchFlightAndVerifyFilter(softest.TestCase):
         self.in_homepage = HomePage(self.driver)
         self.ut = Utils()
     
-    @data(("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"), ("Jakarta", "Padang", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"))
-    @unpack
-    def test_search_flight_without_transit(self, depart_from, going_to, depart_date, transit):
+    # @data(("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"), ("Jakarta", "Padang", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"))
+    # @unpack
+    @file_data("../testdata/testdata.json")
+    def test_search_flight_filter_by_transit(self, depart_from, going_to, depart_date, transit):
         # click plane icon
         search_flight = self.in_homepage.clickPlaneIcon()
         # choose flight type
