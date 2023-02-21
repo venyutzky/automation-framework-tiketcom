@@ -1,6 +1,7 @@
 import softest
 import logging
 import inspect
+from openpyxl import Workbook, load_workbook
 class  Utils(softest.TestCase):
             
     def assertListItemText(self, list, value):
@@ -28,3 +29,17 @@ class  Utils(softest.TestCase):
         #Add console handler to logger
         logger.addHandler(fh)
         return logger
+    
+    def read_data_from_excel(filename, sheet):
+        datalist = []
+        wb = load_workbook(filename=filename)
+        sh = wb[sheet]
+        row_ct = sh.max_row
+        col_ct = sh.max_column
+        
+        for i in range(2, row_ct + 1):
+            row = []
+            for j in range(1, col_ct + 1):
+                row.append(sh.cell(row=i, column=j).value)
+            datalist.append(row)
+        return datalist

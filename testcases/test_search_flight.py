@@ -21,7 +21,10 @@ class TestSearchFlightAndVerifyFilter(softest.TestCase):
     
     # @data(("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"), ("Jakarta", "Padang", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"))
     # @unpack
-    @file_data("../testdata/testdata.json")
+    # @file_data("../testdata/testdata.json") #testdata json format
+    # @file_data("../testdata/testdata.yaml") #testdata yaml format
+    @data(*Utils.read_data_from_excel("C:\\Users\\Reyhan_118348\\Project\\automation_framework_tiketcom\\testdata\\testdata.xlsx", "Sheet1"))
+    @unpack
     def test_search_flight_filter_by_transit(self, depart_from, going_to, depart_date, transit):
         # click plane icon
         search_flight = self.in_homepage.clickPlaneIcon()
