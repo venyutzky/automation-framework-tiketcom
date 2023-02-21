@@ -5,9 +5,11 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "..",".."))
 from automation_framework_tiketcom.pages.HomePage import HomePage
 from automation_framework_tiketcom.utilities.utils import Utils
+from ddt import ddt, data, file_data, unpack
 
 
 @pytest.mark.usefixtures("setup")
+@ddt
 class TestSearchFlightAndVerifyFilter(softest.TestCase):
     
     log = Utils.custom_logger()
@@ -17,14 +19,20 @@ class TestSearchFlightAndVerifyFilter(softest.TestCase):
         self.in_homepage = HomePage(self.driver)
         self.ut = Utils()
     
-    def test_search_flight_without_transit(self):
+    # @data(("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"), ("Jakarta", "Padang", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.", "Langsung"))
+    # @unpack
+    # @file_data("../testdata/testdata.json") #testdata json format
+    # @file_data("../testdata/testdata.yaml") #testdata yaml format
+    @data(*Utils.read_data_from_excel("C:\\Users\\Reyhan_118348\\Project\\automation_framework_tiketcom\\testdata\\testdata.xlsx", "Sheet1"))
+    @unpack
+    def test_search_flight_filter_by_transit(self, depart_from, going_to, depart_date, transit):
         # click plane icon
         search_flight = self.in_homepage.clickPlaneIcon()
         # choose flight type
         search_flight.clickPulangPergiButton()
         search_flight.clickSekaliJalanButton()
         # Search Flight
-        search_flight.searchFlights("Padang", "Jakarta", "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.")
+        search_flight.searchFlights(depart_from, going_to, depart_date)
         # Provide passenger number
         search_flight.clickAddAdultPassengerButton()
         search_flight.clickSubstractAdultPassengerButton()
@@ -44,12 +52,12 @@ class TestSearchFlightAndVerifyFilter(softest.TestCase):
         # click on pop up card
         search_flight_result.clickPopUpButton()
         # Filter the flights
-        search_flight_result.filterFlightTransit("Langsung")
+        search_flight_result.filterFlightTransit(transit)
         # scroll down page
         search_flight_result.page_scroll()
         # assert filter flight
         filter_by_transit = search_flight_result.getSearchFlightByTransitResult()
         self.log.info(len(filter_by_transit))
-        self.ut.assertListItemText(filter_by_transit, "Langsung")
+        self.ut.assertListItemText(filter_by_transit, transit)
         
    

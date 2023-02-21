@@ -6,7 +6,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 #To run
-## pytest --browser edge --url https://www.tiket.com/
+## pytest -v --browser chrome --url https://www.tiket.com/
 
 @pytest.fixture(autouse=True)
 def setup(request, browser, url):
