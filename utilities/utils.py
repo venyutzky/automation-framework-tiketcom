@@ -1,6 +1,7 @@
 import softest
 import logging
 import inspect
+import csv
 from openpyxl import Workbook, load_workbook
 class  Utils(softest.TestCase):
             
@@ -42,4 +43,18 @@ class  Utils(softest.TestCase):
             for j in range(1, col_ct + 1):
                 row.append(sh.cell(row=i, column=j).value)
             datalist.append(row)
+        return datalist
+    
+    def read_data_from_csv(filename):
+        # Create an empty list
+        datalist = []
+        # Open CSV file
+        datacsv = open(filename, mode="r")
+        # Create csv reader
+        reader = csv.reader(datacsv, delimiter=";")
+        # Skip header
+        next(reader)
+        # Add csv data into datalist
+        for rows in reader:
+            datalist.append(rows)
         return datalist
