@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
-
 from automation_framework_tiketcom.base.base_driver import BaseDriver
 from automation_framework_tiketcom.pages.FlightSearchResultPage import FlightSearchResultPage
 from automation_framework_tiketcom.utilities.utils import Utils
