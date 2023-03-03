@@ -23,3 +23,23 @@
 2023-02-28 20:52:37 - INFO - SearchFlightPage : Typed text into going to field succesfully
 2023-02-28 20:52:47 - WARNING - FlightSearchResultPage : Selected flights with 1 transit
 2023-02-28 20:53:06 - INFO - TestSearchFlightAndVerifyFilter : 5
+2023-03-03 13:59:49 - INFO - SearchFlightPage : Clicked on going to
+2023-03-03 13:59:49 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-03-03 14:00:23 - INFO - SearchFlightPage : Clicked on going to
+2023-03-03 14:00:24 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-03-03 14:01:06 - INFO - SearchFlightPage : Clicked on going to
+2023-03-03 14:01:07 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-03-03 14:01:16 - WARNING - FlightSearchResultPage : Selected flights without transit
+2023-03-03 14:01:30 - INFO - TestSearchFlightAndVerifyFilter : 13
+2023-03-03 14:02:12 - INFO - SearchFlightPage : Clicked on going to
+2023-03-03 14:02:12 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-03-03 14:02:20 - WARNING - FlightSearchResultPage : Selected flights with 1 transit
+2023-03-03 14:02:29 - INFO - TestSearchFlightAndVerifyFilter : 1
+2023-03-03 15:52:27 - INFO - SearchFlightPage : Clicked on going to
+2023-03-03 15:52:27 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-03-03 15:52:35 - WARNING - FlightSearchResultPage : Selected flights without transit
+2023-03-03 15:52:46 - INFO - TestSearchFlightAndVerifyFilter : 2
+2023-03-03 15:53:02 - INFO - SearchFlightPage : Clicked on going to
+2023-03-03 15:53:02 - INFO - SearchFlightPage : Typed text into going to field succesfully
+2023-03-03 15:53:10 - WARNING - FlightSearchResultPage : Selected flights with 1 transit
+2023-03-03 15:53:20 - INFO - TestSearchFlightAndVerifyFilter : 1
