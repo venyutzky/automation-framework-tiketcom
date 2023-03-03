@@ -2,14 +2,14 @@
     "test1": {
         "depart_from" : "Padang",
         "going_to" : "Jakarta",
-        "depart_date" : "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.",
+        "depart_date" : "Choose Sabtu, 25 Maret 2023 as your check-in date. It’s available.",
         "transit" : "Langsung"
     },
 
     "test2": {
         "depart_from" : "Jakarta",
         "going_to" : "Padang",
-        "depart_date" : "Choose Sabtu, 25 Februari 2023 as your check-in date. It’s available.",
+        "depart_date" : "Choose Sabtu, 25 Maret 2023 as your check-in date. It’s available.",
         "transit" : "1 Transit"
     }
 }
